@@ -10,7 +10,6 @@ function Question({question, options, answer}) {
             <AnswerOption 
             options = {options}
             answer = {answer}/>
-
         </form>
     </>
   )
