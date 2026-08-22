@@ -1,13 +1,15 @@
 import AnswerOption from './AnswerOption';
 
-function Question({question, options}) {
+function Question({question, options, answer}) {
     // console.log("Q: ", question);
 
   return (
     <>
         <form>
             <p>{question}</p>
-            <AnswerOption options = {options}/>
+            <AnswerOption 
+            options = {options}
+            answer = {answer}/>
 
         </form>
     </>

@@ -35,13 +35,14 @@ function App() {
     correctAnswer: "Usain Bolt",
   },
 ];
-
+console.log("main object", questions);
   return (
     <>
       {questions.map(question =>(<Question
       key = {question.id}
       question = {question.question}
-      options = {question.options}/>) )}
+      options = {question.options}
+      answer = {question.correctAnswer}/>) )}
       
     </>
   )
