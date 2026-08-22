@@ -37,14 +37,15 @@ function App() {
 ];
 console.log("main object", questions);
   return (
-    <>
+    <div className='flex flex-col items-center content-center gap-2'>
+      <div className='font-semibold py-10 text-2xl'>Please answer the following questions</div>
       {questions.map(question =>(<Question
       key = {question.id}
       question = {question.question}
       options = {question.options}
       answer = {question.correctAnswer}/>) )}
       
-    </>
+    </div>
   )
 }
 

@@ -22,9 +22,9 @@ import './answeroption.css'
       {options.map(option =>(
         <div 
         onClick = {handleClick} 
-        className = {`hover:bg-blue-100 ${selected === option ? checkAnswer() ? "bg-green-200 border border-green-300" : "bg-red-200 border border-red-300" : ""}`} >
-          <label>
-            <input type="radio" name = "answer" value = {option} />
+        className = {`px-2 rounded hover:bg-blue-100 ${selected === option ? checkAnswer() ? "bg-green-200 border border-green-300" : "bg-red-200 border border-red-300" : ""}`} >
+          <label >
+            <input type="radio" name = "answer" value = {option} className = 'mr-2'/>
             {option}
           </label>
         </div>
