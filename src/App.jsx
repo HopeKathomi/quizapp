@@ -80,7 +80,7 @@ function App() {
   }
 
   return (
-    <div className='flex flex-col items-center content-center gap-2'>
+    <div className='flex flex-col h-screen items-center justify-center gap-2'>
       <div className='font-semibold py-10 text-2xl'>Please answer the following questions</div>
 
       <Question

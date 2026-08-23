@@ -12,7 +12,7 @@ import './answeroption.css'
   // console.log("a: ", checkAnswer(option));
 
   return (
-    <div>
+    <div className='flex flex-col align-center justify-center'>
       {options.map(option =>(
         <div key = {option}>
           <div 
@@ -37,7 +37,7 @@ import './answeroption.css'
       {selected && (
         <button
           onClick={handleNextButton}
-          className="bg-blue-400 px-4 py-1 rounded-md mt-6">
+          className="bg-blue-400 px-4 py-1 rounded-md mt-6 w-20">
           Next
         </button>
       )}
