@@ -45,7 +45,6 @@ function App() {
   const [finished, setFinished] = useState(false);
   const [score, setScore] = useState(0);
 
-    console.log("start: ", start)
   if(start){
     return <HomePage setStart={setStart} name={name} setName={setName}/>
   }
@@ -82,7 +81,16 @@ function App() {
   return (
     <div className='flex flex-col h-screen items-center justify-center gap-2'>
       <div className='font-semibold py-10 text-2xl'>Please answer the following questions</div>
-
+      <div className='w-full max-w-md'>
+        <div className='flex justify-between mb-2 text-sm'>
+          <span>Progress </span>
+          <span>Question {currentQuestion+1} of {questions.length}</span>
+        </div>
+        <div>
+          <div className='bg-blue-400 h-2 rounded-full transition-all duration-300'
+            style={{width:`${((currentQuestion + 1)/questions.length) * 100}%`}}></div>
+        </div>
+      </div>
       <Question
         key = {questions[currentQuestion].id}
         question={questions[currentQuestion].question}
