@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Question from './components/Question'
 import ResultsScreen from './components/ResultsScreen';
 import './App.css'
+import HomePage from './components/HomePage';
 // import './App.css'
 
 function App() {
@@ -37,13 +38,17 @@ function App() {
       correctAnswer: "Usain Bolt",
     },
   ];
-  // console.log("main object", questions);
-
+  const [start, setStart] = useState(true);
+  const [name, setName] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selected, setSelect] = useState("");
   const [finished, setFinished] = useState(false);
   const [score, setScore] = useState(0);
-  console.log("S: ",selected);
+
+    console.log("start: ", start)
+  if(start){
+    return <HomePage setStart={setStart} name={name} setName={setName}/>
+  }
 
   function handleClick() {
     getScore();
@@ -52,7 +57,6 @@ function App() {
     }else{
       setFinished(true);
     }
-    
   }
 
   function getScore(){
@@ -63,7 +67,7 @@ function App() {
     }
   }
 
-  if (finished){
+  if(finished){
     return <ResultsScreen 
       score = {score} 
       totalQuestions = {questions.length}
@@ -71,6 +75,7 @@ function App() {
       setCurrentQuestion = {setCurrentQuestion}
       setFinished = {setFinished}
       setSelect = {setSelect}
+      name= {name}
       />;
   }
 
