@@ -1,6 +1,6 @@
 import AnswerOption from './AnswerOption';
 
-function Question({question, options, answer}) {
+function Question({question, options, answer, selected, setSelect, handleNextButton, setCorrectAnswer}) {
     // console.log("Q: ", question);
 
   return (
@@ -9,7 +9,11 @@ function Question({question, options, answer}) {
             <p>{question}</p>
             <AnswerOption 
             options = {options}
-            answer = {answer}/>
+            answer = {answer}
+            selected = {selected}
+            setSelect = {setSelect}
+            handleNextButton = {handleNextButton}
+            />
         </form>
     </>
   )

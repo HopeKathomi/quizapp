@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import './answeroption.css'
- function AnswerOption({options, answer}) {
+ function AnswerOption({options, answer, selected, setSelect, handleNextButton, setCorrectAnswer}) {
     
-  const [selected, setSelect] = useState("");
+  // const [selected, setSelect] = useState("");
+
 
   function handleClick(e){
-    setSelect(e.target.value);   
+    setSelect(e.target.value); 
   }
 
   function checkAnswer(option){ 
@@ -36,6 +37,13 @@ import './answeroption.css'
           )}
         </div>
       ))}
+      {selected && (
+        <button
+          onClick={handleNextButton}
+          className="bg-blue-400 px-4 py-1 rounded-md mt-6">
+          Next
+        </button>
+      )}
     </div>
   )
 }

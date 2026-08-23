@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Question from './components/Question'
+import ResultsScreen from './components/ResultsScreen';
+import './App.css'
 // import './App.css'
 
 function App() {
@@ -38,11 +40,21 @@ function App() {
   console.log("main object", questions);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selected, setSelect] = useState("");
+  const [finished, setFinished] = useState(false)
+  const [correctAnswers, setCorrectAnswers] = useState(0)
+  
 
   function handleClick() {
-    setCurrentQuestion(currentQuestion + 1);
+    if(currentQuestion < questions.length-1){
+      setCurrentQuestion(currentQuestion + 1);
+    }else{
+      setFinished(true);
+    }
   }
-  console.log("c: ", questions[currentQuestion].question)
+  if (finished){
+    return <ResultsScreen/>;
+  }
 
   return (
     <div className='flex flex-col items-center content-center gap-2'>
@@ -53,12 +65,11 @@ function App() {
       question={questions[currentQuestion].question}
       options={questions[currentQuestion].options}
       answer={questions[currentQuestion].correctAnswer}
-      />
-
-      <button 
-        onClick = {handleClick}
-        className='bg-blue-400 px-4 py-1 rounded-md mt-6'> Next</button>
-      
+      selected = {selected}
+      setSelect = {setSelect}
+      handleNextButton = {handleClick}
+      />   
+        
     </div>
   )
 }
