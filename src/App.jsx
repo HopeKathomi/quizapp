@@ -1,121 +1,106 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import Question from './components/Question'
+import ResultsScreen from './components/ResultsScreen';
 import './App.css'
+import HomePage from './components/HomePage';
+// import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const questions = [
+    {
+      id: 1,
+      question: "Which country won the 2022 FIFA World Cup?",
+      options: ["Brazil", "Argentina", "France", "Germany"],
+      correctAnswer: "Argentina",
+    },
+    {
+      id: 2,
+      question: "How many players are on the field for one soccer team during a match?",
+      options: ["9", "10", "11", "12"],
+      correctAnswer: "11",
+    },
+    {
+      id: 3,
+      question: "Which sport is played at Wimbledon?",
+      options: ["Tennis", "Cricket", "Rugby", "Golf"],
+      correctAnswer: "Tennis",
+    },
+    {
+      id: 4,
+      question: "How many points is a touchdown worth in American football before the extra point?",
+      options: ["3", "6", "7", "10"],
+      correctAnswer: "6",
+    },
+    {
+      id: 5,
+      question: "Which athlete is known as the fastest man in the world after setting the 100m world record?",
+      options: ["Usain Bolt", "Tyson Gay", "Carl Lewis", "Yohan Blake"],
+      correctAnswer: "Usain Bolt",
+    },
+  ];
+  const [start, setStart] = useState(true);
+  const [name, setName] = useState("");
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selected, setSelect] = useState("");
+  const [finished, setFinished] = useState(false);
+  const [score, setScore] = useState(0);
+
+  if(start){
+    return <HomePage setStart={setStart} name={name} setName={setName}/>
+  }
+
+  function handleClick() {
+    getScore();
+    if(currentQuestion < questions.length-1){
+      setCurrentQuestion(currentQuestion + 1);
+    }else{
+      setFinished(true);
+    }
+  }
+
+  function getScore(){
+    let answer = questions[currentQuestion].correctAnswer;
+
+    if(answer === selected){
+      setScore(score =>score + 1);
+    }
+  }
+
+  if(finished){
+    return <ResultsScreen 
+      score = {score} 
+      totalQuestions = {questions.length}
+      setScore = {setScore}
+      setCurrentQuestion = {setCurrentQuestion}
+      setFinished = {setFinished}
+      setSelect = {setSelect}
+      name= {name}
+      />;
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className='flex flex-col h-screen items-center justify-center gap-2'>
+      <div className='font-semibold py-10 text-2xl'>Please answer the following questions</div>
+      <div className='w-full max-w-md'>
+        <div className='flex justify-between mb-2 text-sm'>
+          <span>Progress </span>
+          <span>Question {currentQuestion+1} of {questions.length}</span>
         </div>
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <div className='bg-blue-400 h-2 rounded-full transition-all duration-300'
+            style={{width:`${((currentQuestion + 1)/questions.length) * 100}%`}}></div>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      </div>
+      <Question
+        key = {questions[currentQuestion].id}
+        question={questions[currentQuestion].question}
+        options={questions[currentQuestion].options}
+        answer={questions[currentQuestion].correctAnswer}
+        selected = {selected}
+        setSelect = {setSelect}
+        handleNextButton = {handleClick}
+      />    
+    </div>
   )
 }
 
