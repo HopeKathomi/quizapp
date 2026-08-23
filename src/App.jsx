@@ -41,9 +41,9 @@ function App() {
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selected, setSelect] = useState("");
-  const [finished, setFinished] = useState(false)
-  const [score, setScore] = useState(0)
-  
+  const [finished, setFinished] = useState(false);
+  const [score, setScore] = useState(0);
+  console.log("S: ",selected);
 
   function handleClick() {
     getScore();
@@ -57,14 +57,21 @@ function App() {
 
   function getScore(){
     let answer = questions[currentQuestion].correctAnswer;
-    
+
     if(answer === selected){
       setScore(score =>score + 1);
     }
   }
 
   if (finished){
-    return <ResultsScreen/>;
+    return <ResultsScreen 
+      score = {score} 
+      totalQuestions = {questions.length}
+      setScore = {setScore}
+      setCurrentQuestion = {setCurrentQuestion}
+      setFinished = {setFinished}
+      setSelect = {setSelect}
+      />;
   }
 
   return (
@@ -79,9 +86,7 @@ function App() {
         selected = {selected}
         setSelect = {setSelect}
         handleNextButton = {handleClick}
-      />   
-        
-        <div>{score}</div>
+      />    
     </div>
   )
 }
