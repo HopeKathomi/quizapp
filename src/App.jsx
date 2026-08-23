@@ -37,21 +37,32 @@ function App() {
       correctAnswer: "Usain Bolt",
     },
   ];
-  console.log("main object", questions);
+  // console.log("main object", questions);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selected, setSelect] = useState("");
   const [finished, setFinished] = useState(false)
-  const [correctAnswers, setCorrectAnswers] = useState(0)
+  const [score, setScore] = useState(0)
   
 
   function handleClick() {
+    getScore();
     if(currentQuestion < questions.length-1){
       setCurrentQuestion(currentQuestion + 1);
     }else{
       setFinished(true);
     }
+    
   }
+
+  function getScore(){
+    let answer = questions[currentQuestion].correctAnswer;
+    
+    if(answer === selected){
+      setScore(score =>score + 1);
+    }
+  }
+
   if (finished){
     return <ResultsScreen/>;
   }
@@ -61,15 +72,16 @@ function App() {
       <div className='font-semibold py-10 text-2xl'>Please answer the following questions</div>
 
       <Question
-      key = {questions[currentQuestion].id}
-      question={questions[currentQuestion].question}
-      options={questions[currentQuestion].options}
-      answer={questions[currentQuestion].correctAnswer}
-      selected = {selected}
-      setSelect = {setSelect}
-      handleNextButton = {handleClick}
+        key = {questions[currentQuestion].id}
+        question={questions[currentQuestion].question}
+        options={questions[currentQuestion].options}
+        answer={questions[currentQuestion].correctAnswer}
+        selected = {selected}
+        setSelect = {setSelect}
+        handleNextButton = {handleClick}
       />   
         
+        <div>{score}</div>
     </div>
   )
 }

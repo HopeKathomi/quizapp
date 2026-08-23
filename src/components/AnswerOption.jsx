@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import './answeroption.css'
  function AnswerOption({options, answer, selected, setSelect, handleNextButton, setCorrectAnswer}) {
-    
-  // const [selected, setSelect] = useState("");
-
 
   function handleClick(e){
     setSelect(e.target.value); 
